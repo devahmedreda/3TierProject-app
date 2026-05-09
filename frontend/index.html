@@ -222,7 +222,10 @@
                 <div class="dot online"></div> Frontend: Active
             </div>
             <div class="status-indicator">
-                <div class="dot" id="backend-dot"></div> Backend API: <span id="backend-text">Connecting...</span>
+                <div class="dot" id="backend-dot"></div> Backend: <span id="backend-text">Connecting...</span>
+            </div>
+            <div class="status-indicator">
+                <div class="dot" id="db-dot"></div> MongoDB: <span id="db-text">Checking...</span>
             </div>
         </div>
     </div>
@@ -248,20 +251,32 @@
         const taskList = document.getElementById('task-list');
         const backendDot = document.getElementById('backend-dot');
         const backendText = document.getElementById('backend-text');
+        const dbDot = document.getElementById('db-dot');
+        const dbText = document.getElementById('db-text');
 
         // Check Backend Status
         async function checkStatus() {
             try {
                 const res = await fetch('/healthz');
+                
+                // If we get any response, the backend is active
+                backendDot.className = 'dot online';
+                backendText.textContent = 'Active';
+
                 if (res.ok) {
-                    backendDot.className = 'dot online';
-                    backendText.textContent = 'Connected (MongoDB Active)';
+                    // /healthz returns 200 when DB is connected
+                    dbDot.className = 'dot online';
+                    dbText.textContent = 'Connected';
                 } else {
-                    throw new Error('API Error');
+                    // /healthz returns 503 when DB is not connected
+                    dbDot.className = 'dot offline';
+                    dbText.textContent = 'Disconnected';
                 }
             } catch (e) {
                 backendDot.className = 'dot offline';
                 backendText.textContent = 'Disconnected';
+                dbDot.className = 'dot offline';
+                dbText.textContent = 'Unknown';
             }
         }
 
