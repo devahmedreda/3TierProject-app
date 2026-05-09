@@ -6,13 +6,13 @@ on:
     paths:
       - 'backend/**'
       - 'frontend/**'
-  workflow_dispatch:  # Allow manual trigger
+  workflow_dispatch:
 
 env:
   AWS_REGION: us-east-1
   ECR_BACKEND_REPO: taskmaster-backend
   ECR_FRONTEND_REPO: taskmaster-frontend
-  GITOPS_REPO: devahmedreda/taskmaster-gitops  # ⚠️ Replace with your actual GitOps repo
+  GITOPS_REPO: devahmedreda/3TierProject-gitops
 
 jobs:
   detect-changes:
