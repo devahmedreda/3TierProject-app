@@ -14,9 +14,9 @@
 
 On push to `main` (when `backend/` or `frontend/` changes):
 
-1. **Detect Changes** — Only build what changed
-2. **Build & Push** — Docker build → Push to AWS ECR
-3. **Update GitOps** — Update image tags in [`taskmaster-gitops`](https://github.com/devahmedreda/taskmaster-gitops) repo
+1. **Detect Changes** - Only build what changed
+2. **Build & Push** - Docker build → Push to AWS ECR
+3. **Update GitOps** - Update image tags in [`taskmaster-gitops`](https://github.com/devahmedreda/taskmaster-gitops) repo
 
 > **Note:** This repo does NOT contain Kubernetes manifests.
 > ArgoCD watches the [GitOps repo](https://github.com/devahmedreda/taskmaster-gitops) for deployments.
